@@ -1,0 +1,11 @@
+root = true
+
+[*.{java, gradle}]
+indent_style = tab
+indent_size = 4
+continuation_indent_size = continuation_indent_size8
+trim_trailing_whitespace = true
+
+[*.yaml]
+indent_size = 2
+trim_trailing_whitespace = true
