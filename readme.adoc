@@ -21,8 +21,8 @@ At this point, you've likely generated a client setup.  It will include somethin
 [source, text]
 ----
 .
-|- README.md    // this file
-|- pom.xml      // build script
+|- readme.adoc    // this file
+|- build.gradle   // build script
 |-- src
 |--- main
 |---- java
