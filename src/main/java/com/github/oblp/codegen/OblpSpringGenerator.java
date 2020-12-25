@@ -1,15 +1,18 @@
 package com.github.oblp.codegen;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.openapitools.codegen.*;
 
 import java.io.File;
 import java.util.*;
 
+@Data
+@EqualsAndHashCode(callSuper = true)
 public class OblpSpringGenerator extends DefaultCodegen implements CodegenConfig {
-
-    // source folder where to write the files
-    protected String sourceFolder = "src";
-    protected String apiVersion = "1.0.0";
+	// source root
+    protected String sourceRoot = "src/main";
+	protected String apiVersion = "0.0.1";
 
     public OblpSpringGenerator() {
         super();
@@ -25,7 +28,9 @@ public class OblpSpringGenerator extends DefaultCodegen implements CodegenConfig
          */
         modelTemplateFiles.put(
                 "model.mustache", // the template to use
-                ".sample");       // the extension for each file to write
+                ".java");       // the extension for each file to write
+
+		apiTemplateFiles.put("apiController.mustache", "Controller.java");
 
         /**
          * Api classes.  You can write classes for each Api file with the apiTemplateFiles map.
@@ -34,7 +39,7 @@ public class OblpSpringGenerator extends DefaultCodegen implements CodegenConfig
          */
         apiTemplateFiles.put(
                 "api.mustache",   // the template to use
-                ".sample");       // the extension for each file to write
+                ".java");       // the extension for each file to write
 
         /**
          * Template Location.  This is the location which templates will be read from.  The generator
@@ -72,9 +77,9 @@ public class OblpSpringGenerator extends DefaultCodegen implements CodegenConfig
          * entire object tree available.  If the input file has a suffix of `.mustache
          * it will be processed by the template engine.  Otherwise, it will be copied
          */
-        supportingFiles.add(new SupportingFile("myFile.mustache",   // the input template or file
+        supportingFiles.add(new SupportingFile("build.mustache",   // the input template or file
                 "",                                                       // the destination folder, relative `outputFolder`
-                "myFile.sample")                                          // the output file
+                "build.gradle")                                          // the output file
         );
 
         /**
@@ -95,7 +100,7 @@ public class OblpSpringGenerator extends DefaultCodegen implements CodegenConfig
      * @see org.openapitools.codegen.CodegenType
      */
     public CodegenType getTag() {
-        return CodegenType.OTHER;
+        return CodegenType.SERVER;
     }
 
     /**
@@ -159,7 +164,7 @@ public class OblpSpringGenerator extends DefaultCodegen implements CodegenConfig
      * instantiated
      */
     public String modelFileFolder() {
-        return outputFolder + "/" + sourceFolder + "/" + modelPackage().replace('.', File.separatorChar);
+        return outputFolder + "/" + sourceRoot + "/java/" + modelPackage().replace('.', File.separatorChar);
     }
 
     /**
@@ -168,7 +173,7 @@ public class OblpSpringGenerator extends DefaultCodegen implements CodegenConfig
      */
     @Override
     public String apiFileFolder() {
-        return outputFolder + "/" + sourceFolder + "/" + apiPackage().replace('.', File.separatorChar);
+        return outputFolder + "/" + sourceRoot + "/java/" + apiPackage().replace('.', File.separatorChar);
     }
 
     /**
