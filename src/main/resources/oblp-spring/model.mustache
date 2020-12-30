@@ -1,1 +1,12 @@
-# This is a sample model mustache template.
+package {{package}};
+
+{{#models}}
+{{#model}}
+{{#isEnum}}
+{{>enumOuterClass}}
+{{/isEnum}}
+{{^isEnum}}
+{{>pojo}}
+{{/isEnum}}
+{{/model}}
+{{/models}}

@@ -1,0 +1,10 @@
+import lombok.Data;
+
+/**
+ * {{#description}}{{.}}{{/description}}
+ */
+@Data
+public class {{classname}} {
+{{#vars}} private {{{datatypeWithEnum}}} {{name}};
+{{/vars}}
+}
